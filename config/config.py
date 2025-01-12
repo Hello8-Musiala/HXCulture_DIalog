@@ -31,7 +31,7 @@ class Config(object):
     def _load_config(cls):
         instance = Config()
         root = get_app_root()
-        env = os.environ.get("PY_ENVIRONMENT")
+        env = os.getenv("ENV", "local")  # Default to 'local' if ENV is not set
         with open(os.path.join(root, "config", f"config-{env}.yaml"), "r", encoding="utf-8") as f:
             setattr(instance, "_config", yaml.load(f, Loader=yaml.FullLoader))
 

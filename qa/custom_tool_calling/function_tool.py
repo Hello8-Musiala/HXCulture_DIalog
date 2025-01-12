@@ -34,7 +34,7 @@ def basic_info_tool(entities: List[_Value] | None) -> Tuple[str, QuestionType] |
     if node_match:
         node = node_match.first()
         return (
-            f"{entities[0].name}, 生于{node['DynastyBirth']}。{node['DynastyDeath']}时期文人。" + "下面以json格式给出这个人的完整基本信息：" + node.__repr__(),
+            f"{entities[0].name}, 生于{node['DynastyBirth']}。{node['DynastyDeath']}时期的伟人。" + "下面以json格式给出这个人的完整基本信息：" + node.__repr__(),
             QuestionType.BASIC_INFO)
 
 

@@ -3,4 +3,4 @@
 # @Author  : hello8
 # @FileName: __init__.py.py
 # @Software: VSCode
-# @Affiliation: tfswufe.edu.cn
+# @Affiliation: hunnu.edu.cn

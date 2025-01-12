@@ -1,4 +1,3 @@
-
 import os.path
 from abc import ABC
 
@@ -42,6 +41,8 @@ class RagRetriever(ModelBase, ABC):
 
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=240, chunk_overlap=40)
         documents = text_splitter.split_documents(docs)
+        if not documents:
+            raise ValueError("No documents to build the vector store")
         self._vector = FAISS.from_documents(documents, self._embedding)
 
         self._retriever = self._vector.as_retriever(search_kwargs={"k": 6})
@@ -86,6 +87,12 @@ class RagRetriever(ModelBase, ABC):
         self._logger.info("loading vector db")
         self._vector = FAISS.load_local(model_path, self._embedding, allow_dangerous_deserialization=True)
         self._retriever = self._vector.as_retriever(search_kwargs={"k": 6})
+
+    def _load_model_info(self, version):
+        model_info_path = os.path.join(self.model_dir, f"{version}_info.json")
+        if not os.path.exists(model_info_path):
+            raise ModelLoadError("model info file not found")
+        # ...existing code...
 
     def dump(self, *args, **kwargs):
         self._remove_obsolete_versions()

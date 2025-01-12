@@ -23,7 +23,7 @@ database:
     port: 3306
     user: root
     password: kissme77
-    database: test
+    database: hx_cultural_transmission_sys
 
   neo4j:
     url: bolt://localhost:7687
